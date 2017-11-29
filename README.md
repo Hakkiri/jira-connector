@@ -269,6 +269,7 @@ is still valid!
   * getBoard
   * getIssuesForBoard
   * getSprintsForBoard
+  * getEpicsForBoard
 * comment (/rest/api/2/comment)
   * getCommentPropertyKeys
   * setCommentProperty
@@ -285,6 +286,9 @@ is still valid!
 * dashboard (/rest/api/2/dashboard)
   * getAllDashboards
   * getDashboard
+* epic (/rest/api/2/epic)
+  * getIssuesForEpic
+  * getIssuesWithoutEpic
 * field (/rest/api/2/field)
   * getAllFields
   * createCustomField

@@ -3,7 +3,7 @@
 module.exports = AgileBoardClient;
 
 /**
- * Used to access Jira REST endpoints in '/rest/agile/1.0/dashboard'
+ * Used to access Jira REST endpoints in '/rest/agile/1.0/board'
  * @param {JiraClient} jiraClient
  * @constructor AgileBoardClient
  */
@@ -167,4 +167,74 @@ function AgileBoardClient(jiraClient) {
 
       return this.jiraClient.makeRequest(options, callback);
   };
+
+  /**
+   * Get a list of epics associated with an agile board
+   *
+   * @method getEpicsForBoard
+   * @memberOf AgileBoardClient#
+   * @param opts The request options to send to the Jira API
+   * @param opts.boardId The agile board id.
+   * @param [opts.startAt] The index of the first sprint to return (0-based). must be 0 or a multiple of
+   *     maxResults
+   * @param [opts.maxResults] A hint as to the the maximum number of sprints to return in each call. Note that the
+   *     JIRA server reserves the right to impose a maxResults limit that is lower than the value that a client
+   *     provides, dues to lack or resources or any other condition. When this happens, your results will be
+   *     truncated. Callers should always check the returned maxResults to determine the value that is effectively
+   *     being used.
+   * @param [opts.done] Filters results to epics that are either done or not done. Valid values: true, false
+   * @param callback Called when the epics have been retrieved.
+   * @return {Promise} Resolved when the sprints have been retrieved.
+   */
+  this.getSprintsForBoard = function (opts, callback) {
+    var options = {
+      uri: this.jiraClient.buildAgileURL('/board/' + opts.boardId + '/epic'),
+      method: 'GET',
+      json: true,
+      followAllRedirects: true,
+      qs: {
+        startAt: opts.startAt,
+        maxResults: opts.maxResults,
+        done: opts.done
+      }
+    };
+
+    return this.jiraClient.makeRequest(options, callback);
+  };
+
+  /**
+   * Get a list of epics associated with an agile board
+   *
+   * @method getEpicsForBoard
+   * @memberOf AgileBoardClient#
+   * @param opts The request options to send to the Jira API
+   * @param opts.boardId The agile board id.
+   * @param [opts.startAt] The index of the first sprint to return (0-based). must be 0 or a multiple of
+   *     maxResults
+   * @param [opts.maxResults] A hint as to the the maximum number of epics to return in each call. Note that the
+   *     JIRA server reserves the right to impose a maxResults limit that is lower than the value that a client
+   *     provides, dues to lack or resources or any other condition. When this happens, your results will be
+   *     truncated. Callers should always check the returned maxResults to determine the value that is effectively
+   *     being used.
+   * @param [opts.done] Filters results to epics that are either done or not done. Valid values: true, false
+   * @param callback Called when the epics have been retrieved.
+   * @return {Promise} Resolved when the epics have been retrieved.
+   */
+  this.getEpicsForBoard = function (opts, callback) {
+    var options = {
+      uri: this.jiraClient.buildAgileURL('/board/' + opts.boardId + '/epic'),
+      method: 'GET',
+      json: true,
+      followAllRedirects: true,
+      qs: {
+        startAt: opts.startAt,
+        maxResults: opts.maxResults,
+        done: opts.done
+      }
+    };
+
+    return this.jiraClient.makeRequest(options, callback);
+  };
+
+
 }

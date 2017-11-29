@@ -11,7 +11,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Caleb Brinkman <floralvikings@gmail.com>",
+  "author": "James Smith <jdsphoenix1@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "oauth": "^0.9.12",
@@ -19,6 +19,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:floralvikings/jira-connector.git"
+    "url": "git@github.com:jsmith-phoenix/jira-connector.git"
   }
 }

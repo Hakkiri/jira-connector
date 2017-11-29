@@ -17,6 +17,7 @@ var comment = require('./api/comment');
 var component = require('./api/component');
 var customFieldOption = require('./api/customFieldOption');
 var dashboard = require('./api/dashboard');
+var epic = require('./api/epic');
 var errorStrings = require('./lib/error');
 var field = require('./api/field');
 var filter = require('./api/filter');
@@ -72,6 +73,7 @@ var worklog = require('./api/worklog');
  * @property {ComponentClient} component
  * @property {CustomFieldOptionClient} customFieldOption
  * @property {DashboardClient} dashboard
+ * @property {EpicClient} epic
  * @property {FieldClient} field
  * @property {FilterClient} filter
  * @property {GroupClient} group
@@ -196,6 +198,7 @@ var JiraClient = module.exports = function (config) {
     this.component = new component(this);
     this.customFieldOption = new customFieldOption(this);
     this.dashboard = new dashboard(this);
+    this.epic = new epic(this);
     this.field = new field(this);
     this.filter = new filter(this);
     this.group = new group(this);
