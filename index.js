@@ -136,7 +136,7 @@ var worklog = require('./api/worklog');
  *      Default - require('request').
  */
 
-var JiraClient = module.exports = function (config) {
+const JiraClient = module.exports = function (config) {
     if(!config.host) {
         throw new Error(errorStrings.NO_HOST_ERROR);
     }
@@ -343,9 +343,16 @@ var JiraClient = module.exports = function (config) {
               if (!options.headers) {
                 options.headers = {}
               }
-              options.headers['Authorization'] = 'Basic ' + this.basic_auth.base64
+              options.headers['Authorization'] = 'Basic ' + this.basic_auth.base64;
             } else {
+              console.log('*************Setting Headers************');
               options.auth = this.basic_auth;
+              if (!options.headers) {
+                options.headers = {}
+              }
+              options.headers["Content-Type"] = "application/json";
+              options.headers["Access-Control-Allow-Origin"] = "*";
+              options.headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept";
             }
         }
         if (this.cookie_jar) {
@@ -420,3 +427,4 @@ var JiraClient = module.exports = function (config) {
 JiraClient.oauth_util = require('./lib/oauth_util');
 
 exports.oauth_util = oauth_util;
+
