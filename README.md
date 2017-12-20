@@ -413,6 +413,8 @@ is still valid!
 * resolution (/rest/api/2/resolution)
   * getAllResolutions
   * getResolution
+* reports (/rest/greenhopper/1.0/rapid/charts/velocity?rapidViewId=<BoardID>)
+  * getHistoricalVelocity
 * screens (/rest/api/2/screens)
   * getAvailableFields
   * getTabs

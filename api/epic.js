@@ -29,7 +29,8 @@ function AgileEpicClient(jiraClient) {
    */
   this.getIssuesForEpic = function(opts, callback) {
     var options = {
-      uri: this.jiraClient.buildAgileURL('/epic/' + opts.epicId + '/issue'),
+      // uri: this.jiraClient.buildAgileURL('/epic/' + opts.epicId + '/issue'),
+      uri: this.jiraClient.buildAgileURL('/board/' + opts.boardId + '/epic/' + opts.epicId + '/issue'),
       method: 'GET',
       json: true,
       followAllRedirects: true,

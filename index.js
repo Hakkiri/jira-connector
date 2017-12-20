@@ -42,6 +42,7 @@ var projectCategory = require('./api/projectCategory');
 var projectValidate = require('./api/projectValidate');
 var reindex = require('./api/reindex');
 var resolution = require('./api/resolution');
+var reports = require('./api/reports');
 var screens = require('./api/screens');
 var search = require('./api/search');
 var securityLevel = require('./api/securityLevel');
@@ -109,6 +110,7 @@ var worklog = require('./api/worklog');
  * @property {WorkflowClient} workflow
  * @property {WorkflowSchemeClient} workflowScheme
  * @property {WorklogClient} worklog
+ * @property {ReportsClient} reports
  *
  * @param config The information needed to access the Jira API
  * @param {string} config.host The hostname of the Jira API.
@@ -221,6 +223,7 @@ const JiraClient = module.exports = function (config) {
     this.projectValidate = new projectValidate(this);
     this.reindex = new reindex(this);
     this.resolution = new resolution(this);
+    this.reports = new reports(this);
     this.screens = new screens(this);
     this.search = new search(this);
     this.securityLevel = new securityLevel(this);
@@ -280,6 +283,28 @@ const JiraClient = module.exports = function (config) {
 
         return decodeURIComponent(requestUrl);
     };
+
+  /**
+   * Simple utility to build a REST endpoint URL for the Jira Agile API.
+   *
+   * @method buildAgileURL
+   * @memberOf JiraClient#
+   * @param path The path of the URL without concern for the root of the REST API.
+   * @returns {string} The constructed URL.
+   */
+  this.buildReportingURL = function (path) {
+    var apiBasePath = this.path_prefix + 'rest/greenhopper/';
+    var version = this.agileApiVersion;
+    var requestUrl = url.format({
+      protocol: this.protocol,
+      hostname: this.host,
+      port: this.port,
+      pathname: apiBasePath + version + path
+    });
+
+    return decodeURIComponent(requestUrl);
+  };
+
 
     /**
      * Simple utility to build a REST endpoint URL for the Jira Auth API.
@@ -345,14 +370,13 @@ const JiraClient = module.exports = function (config) {
               }
               options.headers['Authorization'] = 'Basic ' + this.basic_auth.base64;
             } else {
-              console.log('*************Setting Headers************');
               options.auth = this.basic_auth;
               if (!options.headers) {
                 options.headers = {}
               }
               options.headers["Content-Type"] = "application/json";
-              options.headers["Access-Control-Allow-Origin"] = "*";
-              options.headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept";
+              // options.headers["Access-Control-Allow-Origin"] = "*";
+              // options.headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept";
             }
         }
         if (this.cookie_jar) {
