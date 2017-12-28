@@ -1,17 +1,18 @@
 {
   "name": "jira-connector",
   "version": "2.7.0",
-  "description": "Easy to use NodeJS wrapper for the Jira REST API.",
+  "description": "Hakkiri extended NodeJS wrapper for the Jira REST API.",
   "keywords": [
     "JIRA",
     "REST",
-    "OAuth"
+    "OAuth",
+    "Hakkiri"
   ],
   "main": "./index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "James Smith <jdsphoenix1@gmail.com>",
+  "author": "James Smith <founders@hakkiri.io>",
   "license": "MIT",
   "dependencies": {
     "oauth": "^0.9.12",

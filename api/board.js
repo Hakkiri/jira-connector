@@ -188,7 +188,7 @@ function AgileBoardClient(jiraClient) {
    */
   this.getSprintsForBoard = function (opts, callback) {
     var options = {
-      uri: this.jiraClient.buildAgileURL('/board/' + opts.boardId + '/epic'),
+      uri: this.jiraClient.buildAgileURL('/board/' + opts.boardId + '/sprint'),
       method: 'GET',
       json: true,
       followAllRedirects: true,
