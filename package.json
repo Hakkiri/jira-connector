@@ -4,7 +4,6 @@
   "description": "Hakkiri extended NodeJS wrapper for the Jira REST API.",
   "keywords": [
     "JIRA",
-    "REST",
     "OAuth",
     "Hakkiri"
   ],
