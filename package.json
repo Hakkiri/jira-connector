@@ -1,5 +1,5 @@
 {
-  "name": "jira-connector",
+  "name": "hakkiri-jira-connector",
   "version": "2.7.0",
   "description": "Hakkiri extended NodeJS wrapper for the Jira REST API.",
   "keywords": [
@@ -12,7 +12,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "James Smith <founders@hakkiri.io>",
+  "author": "founders <founders@hakkiri.io>",
   "license": "MIT",
   "dependencies": {
     "oauth": "^0.9.12",

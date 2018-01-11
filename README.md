@@ -1,33 +1,28 @@
 # JavaScript Jira API Wrapper for NodeJS
 
-Node.JS module which provides easy-to-use access to the Jira REST API.
+Hakkiri extended version of floralvikings/jira-connector Node.JS module which provides easy-to-use access to the Jira REST API.
 
-## Important Change in Version 1.0.0
 
-Starting with version 1.0.0, all functions and parameters utilize ```xxxId``` instead of ```xxxID```.
-Prior to this update, this naming convention was inconsistent and easily confused.
-
-Please update your code accordingly.
 
 ## Installation
 
 Install with [npm](http://npmjs.org/):
 
 ```
-    $ npm install jira-connector
+    $ npm install hakkiri-jira-connector
 ```
 
 Install via Git clone:
 
 ```
-    $ git clone https://github.com/floralvikings/jira-connector.git
-    $ cd jira-connector
+    $ git clone https://github.com/floralvikings/hakkiri-jira-connector.git
+    $ cd hakkiri-jira-connector
     $ npm install
 ```
 
 ## Documentation
 
-The documentation for jira-connector can be found in the source; If you'd like to view
+The documentation for hakkiri-jira-connector can be found in the source; If you'd like to view
 the source as an HTML document, you can use [JSDoc](http://usejsdoc.org/) to generate these
 pages.  Simply run:
 
@@ -35,11 +30,11 @@ pages.  Simply run:
     $ jsdoc -c jsdoc.json
 ```
 
-In the jira-connector source directory.  This will create a ```docs``` directory, containing the HTML
+In the hakkiri-jira-connector source directory.  This will create a ```docs``` directory, containing the HTML
 markup for the docs.
 
 Also, the [official Jira API docs](https://docs.atlassian.com/jira/REST/latest/) are very useful; many of
-the functions in jira-connector use the exact same format as the request bodies of these endpoints.
+the functions in hakkiri-jira-connector use the exact same format as the request bodies of these endpoints.
 
 ## Example
 
@@ -47,7 +42,7 @@ Retrieve an issue from Jira, and print its summary to the console.
 
 ```javascript
 
-var JiraClient = require('jira-connector');
+var JiraClient = require('hakkiri-jira-connector');
 
 var jira = new JiraClient( {
     host: 'jenjinstudios.atlassian.net'
@@ -61,12 +56,12 @@ jira.issue.getIssue({
 
 ```
 
-First, the ```JiraApi``` class is imported from the ```jira-connector``` module.  This class
+First, the ```JiraApi``` class is imported from the ```hakkiri-jira-connector``` module.  This class
 provides access to the Jira REST endpoints, organized into related classes.
 
 The ```issue``` property of the ```JiraApi``` class is used to retrieve and modify Jira Issues.
 
-All of the methods in the jira-connector API classes take two arguments; the ```opts``` and ```callback```.
+All of the methods in the hakkiri-jira-connector API classes take two arguments; the ```opts``` and ```callback```.
 
 * The ```opts``` argument specifies the options that will be used when communicating with the Jira API.  For a detailed
   list of options, see the documentation for the method into which you are passing the options.
@@ -78,17 +73,17 @@ All of the methods in the jira-connector API classes take two arguments; the ```
 Depending on the Jira instance to which you are connecting, authentication may or may not be required
 for various API calls.
 
-jira-connector supports two forms of authentication:
+hakkiri-jira-connector supports two forms of authentication:
 
 ### Basic Authentication
 
 This is not recommended; it will require you to provide a username and password each time you connect to the
-Jira instance.  However, jira-connector supports it for users who are unable to use OAuth.
+Jira instance.  However, hakkiri-jira-connector supports it for users who are unable to use OAuth.
 
 Example:
 
 ```javascript
-var JiraClient = require('jira-connector');
+var JiraClient = require('hakkiri-jira-connector');
 
 var jira = new JiraClient( {
     host: 'jenjinstudios.atlassian.net',
@@ -110,7 +105,7 @@ More examples [here](https://developer.atlassian.com/jiradev/jira-apis/jira-rest
 Example:
 
 ```javascript
-var JiraClient = require('jira-connector');
+var JiraClient = require('hakkiri-jira-connector');
 
 var jira = new JiraClient( {
     host: 'jenjinstudios.atlassian.net',
@@ -137,7 +132,7 @@ be helpful in configuring OAuth Access.
 Once the Application Link has been created, you will need the private key that corresponds to the public key used to
 create the link, and the consumer key that was provided when the link was created.
 
-Once you have this data, you will need to generate an OAuth token and secret for your account; jira-connector provides
+Once you have this data, you will need to generate an OAuth token and secret for your account; hakkiri-jira-connector provides
 helper functions for exactly this purpose:
 
 ```javascript
@@ -168,7 +163,7 @@ This will output something similar to the following:
 
 You can then visit the specified URL, which will display a page asking you to allow or deny the request for access.
 Allowing access will display a verifier code.  Once you have this code, you can swap out your current OAuth token
-for an Access Token with all the permissions of your account; jira-connector provides a function to help with this:
+for an Access Token with all the permissions of your account; hakkiri-jira-connector provides a function to help with this:
 
 ```javascript
 var JiraClient = require('./index.js');
@@ -217,7 +212,7 @@ pain of setting up an OAuth method.
 
 For example, using `though-cookie-filestore`:
 ```javascript
-var JiraClient = require('../jira-connector'),
+var JiraClient = require('../hakkiri-jira-connector'),
     FileCookieStore = require('tough-cookie-filestore'),
 
     request = require('request'),
