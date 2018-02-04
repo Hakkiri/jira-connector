@@ -171,7 +171,7 @@ function AgileBoardClient(jiraClient) {
   /**
    * Get a list of epics associated with an agile board
    *
-   * @method getEpicsForBoard
+   * @method getSprintsForBoard
    * @memberOf AgileBoardClient#
    * @param opts The request options to send to the Jira API
    * @param opts.boardId The agile board id.
@@ -235,6 +235,31 @@ function AgileBoardClient(jiraClient) {
 
     return this.jiraClient.makeRequest(options, callback);
   };
+
+  /**
+   * Get the configurations settings associated with the board
+   *
+   * @method getBoardConfig
+   * @memberOf AgileBoardClient#
+   * @param opts The request options to send to the Jira API
+   * @param opts.boardId The agile board id.
+   * @param callback Called when the config has been retrieved.
+   * @return {Promise} Resolved when config has been retrieved.
+   */
+  this.getBoardConfig = function (opts, callback) {
+    var options = {
+      uri: this.jiraClient.buildReportingURL('/rapidviewconfig/editmodel'),
+      method: 'GET',
+      json: true,
+      followAllRedirects: true,
+      qs: {
+        rapidViewId: opts.boardId
+      }
+    };
+
+    return this.jiraClient.makeRequest(options, callback);
+  };
+
 
 
 }
