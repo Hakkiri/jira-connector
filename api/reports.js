@@ -28,23 +28,13 @@ function AgileReportsClient(jiraClient) {
    * @return {Promise} Resolved when the dashboards have been retrieved.
    */
   this.getHistoricalVelocity = function(opts, callback) {
-    console.log('Getting Historical Velocity: ', JSON.stringify(opts, null, 2));
-
     var options = {
 
       ///rest/greenhopper/1.0/rapid/charts/velocity?rapidViewId=123
-      // uri: this.jiraClient.buildAgileURL('/epic/' + opts.epicId + '/issue'),
       uri: this.jiraClient.buildReportingURL('/rapid/charts/velocity?rapidViewId=' + opts.boardId),
       method: 'GET',
-      json: true,
-      // followAllRedirects: true,
-      // qs: {
-      //   startAt: opts.startAt,
-      //   maxResults: opts.maxResults
-      // }
+      json: true
     };
-
-    console.log('Getting Historical Velocity: ', JSON.stringify(options, null, 2));
     return this.jiraClient.makeRequest(options, callback);
   };
 
