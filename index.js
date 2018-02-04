@@ -287,7 +287,7 @@ var JiraClient = module.exports = function (config) {
   /**
    * Simple utility to build a REST endpoint URL for the Jira Agile API.
    *
-   * @method buildAgileURL
+   * @method buildReportingURL
    * @memberOf JiraClient#
    * @param path The path of the URL without concern for the root of the REST API.
    * @returns {string} The constructed URL.
@@ -445,4 +445,3 @@ var JiraClient = module.exports = function (config) {
 JiraClient.oauth_util = require('./lib/oauth_util');
 
 exports.oauth_util = oauth_util;
-
