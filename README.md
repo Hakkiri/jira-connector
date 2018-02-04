@@ -265,6 +265,7 @@ is still valid!
   * getIssuesForBoard
   * getSprintsForBoard
   * getEpicsForBoard
+  * getBoardConfig
 * comment (/rest/api/2/comment)
   * getCommentPropertyKeys
   * setCommentProperty
