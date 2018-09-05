@@ -99,8 +99,14 @@ function AgileBoardClient(jiraClient) {
       }
     };
 
-      return this.jiraClient.makeRequest(options, callback);
+    if (opts.hasOwnProperty('jql')) {
+      options.qs.jql = opts.jql;
+    }
+
+    return this.jiraClient.makeRequest(options, callback);
   };
+
+
 
   /**
    * Get a list of sprints associated with an agile board
@@ -169,7 +175,7 @@ function AgileBoardClient(jiraClient) {
   };
 
   /**
-   * Get a list of epics associated with an agile board
+   * Get a list of sprints associated with an agile board
    *
    * @method getSprintsForBoard
    * @memberOf AgileBoardClient#
