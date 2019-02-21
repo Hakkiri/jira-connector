@@ -15,8 +15,8 @@ Install with [npm](http://npmjs.org/):
 Install via Git clone:
 
 ```
-    $ git clone https://github.com/floralvikings/hakkiri-jira-connector.git
-    $ cd hakkiri-jira-connector
+    $ git clone https://github.com/Hakkiri/jira-connector.git
+    $ cd jira-connector
     $ npm install
 ```
 
