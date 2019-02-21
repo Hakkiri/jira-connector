@@ -156,6 +156,7 @@ function AgileBoardClient(jiraClient) {
    *     provides, dues to lack or resources or any other condition. When this happens, your results will be
    *     truncated. Callers should always check the returned maxResults to determine the value that is effectively
    *     being used.
+   * @param [opts.jql] Filters results using a JQL query.
    * @param [callback] Called when the backlog issues have been retrieved.
    * @return {Promise} Resolved when the backlog issues have been retrieved.
    */
@@ -171,7 +172,43 @@ function AgileBoardClient(jiraClient) {
       }
     };
 
-      return this.jiraClient.makeRequest(options, callback);
+    if (opts.hasOwnProperty('jql')) {
+      options.qs.jql = opts.jql;
+    }
+
+    return this.jiraClient.makeRequest(options, callback);
+  };
+
+  /**
+   * Get a list of all projects associated with the board.
+   *
+   * @method getProjectsForBoard
+   * @memberOf AgileBoardClient#
+   * @param opts The request options to send to the Jira API
+   * @param opts.boardId The agile board id.
+   * @param [opts.startAt] The index of the first dashboard to return (0-based). must be 0 or a multiple of
+   *     maxResults
+   * @param [opts.maxResults] A hint as to the the maximum number of projects to return in each call. Note that the
+   *     JIRA server reserves the right to impose a maxResults limit that is lower than the value that a client
+   *     provides, dues to lack or resources or any other condition. When this happens, your results will be
+   *     truncated. Callers should always check the returned maxResults to determine the value that is effectively
+   *     being used.
+   * @param [callback] Called when the backlog issues have been retrieved.
+   * @return {Promise} Resolved when the backlog issues have been retrieved.
+   */
+  this.getProjectsForBoard = function (opts, callback) {
+    var options = {
+      uri: this.jiraClient.buildAgileURL('/board/' + opts.boardId + '/project'),
+      method: 'GET',
+      json: true,
+      followAllRedirects: true,
+      qs: {
+        startAt: opts.startAt,
+        maxResults: opts.maxResults
+      }
+    };
+
+    return this.jiraClient.makeRequest(options, callback);
   };
 
   /**
@@ -242,7 +279,34 @@ function AgileBoardClient(jiraClient) {
     return this.jiraClient.makeRequest(options, callback);
   };
 
+    /**
+   * Get the configuration of an agile board
+   *
+   * @method getConfigurationForBoard
+   * @memberOf AgileBoardClient#
+   * @param opts The request options to send to the Jira API
+   * @param opts.boardId The agile board id.
+   * @param callback Called when the epics have been retrieved.
+   * @return {Promise} Resolved when the epics have been retrieved.
+   */
+  this.getConfigurationForBoard = function (opts, callback) {
+    var options = {
+      uri: this.jiraClient.buildAgileURL('/board/' + opts.boardId + '/configuration'),
+      method: 'GET',
+      json: true,
+      followAllRedirects: true
+    };
+
+    return this.jiraClient.makeRequest(options, callback);
+  };
+
   /**
+   * DEPRECATE THIS API CALL
+   *   -- Instead use some combination of:
+   *      * board.getProjectsForBoard
+   *      * board.getConfigurationForBoard
+   *      * filter.getFilter
+   * 
    * Get the configurations settings associated with the board
    *
    * @method getBoardConfig
@@ -265,7 +329,5 @@ function AgileBoardClient(jiraClient) {
 
     return this.jiraClient.makeRequest(options, callback);
   };
-
-
 
 }
