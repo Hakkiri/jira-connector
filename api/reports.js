@@ -31,15 +31,9 @@ function AgileReportsClient(jiraClient) {
     var options = {
 
       ///rest/greenhopper/1.0/rapid/charts/velocity?rapidViewId=123
-      // uri: this.jiraClient.buildAgileURL('/epic/' + opts.epicId + '/issue'),
       uri: this.jiraClient.buildReportingURL('/rapid/charts/velocity?rapidViewId=' + opts.boardId),
       method: 'GET',
-      json: true,
-      // followAllRedirects: true,
-      // qs: {
-      //   startAt: opts.startAt,
-      //   maxResults: opts.maxResults
-      // }
+      json: true
     };
     return this.jiraClient.makeRequest(options, callback);
   };
