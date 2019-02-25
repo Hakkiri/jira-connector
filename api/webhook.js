@@ -81,6 +81,36 @@ function WebhookClient(jiraClient) {
         return this.jiraClient.makeRequest(options, callback);
     };
 
+  /**
+   * Updates an existing webhook.
+   *
+   * @method updateWebhook
+   * @memberOf WebhookClient#
+   * @param opts The options sent to the JIRA API.
+   * @param opts.webhookId The numerical webhook ID.
+   * @param opts.name The name of the webhook.
+   * @param opts.url The URL of the webhook.
+   * @param opts.events An array of events with which the webhook should be registered. See
+   *   {@link https://developer.atlassian.com/jiradev/jira-apis/webhooks#Webhooks-configureConfiguringawebhook}.
+   * @param opts.enabled Whether the webhook is enabled.
+   * @param opts.filter An object containing filter configuration.
+   * @param opts.filter.issue-related-events-section A filter for issues, written in JQL.
+   * @param opts.excludeBody Whether to send an empty body to the webhook URL.
+   * @param [callback] Called when the webhook has been retrieved.
+   * @return {Promise} Resolved when the webhook has been retrieved.
+   */
+  this.updateWebhook = function (opts, callback) {
+    var options = {
+      uri: this.jiraClient.buildWebhookURL('/webhook/' + opts.webhookId),
+      method: 'PUT',
+      json: true,
+      body: opts,
+      followAllRedirects: true
+    };
+
+    return this.jiraClient.makeRequest(options, callback);
+  };
+
     /**
      * Deletes a registered webhook.
      *
