@@ -117,10 +117,10 @@ var jira = new JiraClient( {
 // Base64 encoding of 'SirUserOfName:Password123'
 ```
 
-### OAuth Authentication
+### OAuth1 Authentication
 
-This should be the preferred method of authentication; it is more secure and does not require disclosing
-your password.
+This should be the preferred method of authentication where OAuth2 is not supported or applicable; it is more secure and does 
+not require disclosing your password.
 
 However, setting up OAuth access in Jira can be somewhat complicated; first the Jira administrator must create
 an Application Link; for instructions on how to do this, see
@@ -199,6 +199,33 @@ var jira = new JiraClient({
         '-----END RSA PRIVATE KEY-----',
         token: 'your-access-token',
         token_secret: 'your-token-secret'
+    }
+});
+
+// Jira is now authenticted with your account!
+```
+
+### OAuth2 Authentication (3LO)
+
+OAuth2 authentication is the preferred form of authentication where supported. See Jira roadmap for current support. If
+you are developing an application to be used by others against Jira Cloud, then this is the best method.
+
+You will need to first register your application with jira and then guide users through the Authorization flow. See
+[Jira Docs](https://developer.atlassian.com/cloud/jira/platform/oauth-2-authorization-code-grants-3lo-for-apps) for more
+info.
+
+You will ultimately have a bearer token and a cloud ID for whatever instance. Note that the token and cloud ID contain
+the context requied for the Jira instance, so you do NOT pass in a specific host yourself.
+
+```javascript
+var JiraClient = require('./index.js');
+
+var jira = new JiraClient({
+    host: 'api.atlassian.com'',
+    path_prefix: `ex/jira/${myCloudId}/`,
+    oauth: {
+      is_oauth2: true,
+      bearer_token: myAccessToken,
     }
 });
 

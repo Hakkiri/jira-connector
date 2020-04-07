@@ -1,6 +1,6 @@
 {
   "name": "hakkiri-jira-connector",
-  "version": "2.9.0",
+  "version": "3.0.0",
   "description": "Hakkiri extended NodeJS wrapper for the Jira REST API.",
   "keywords": [
     "JIRA",
@@ -14,7 +14,7 @@
   "author": "founders <founders@hakkiri.io>",
   "license": "MIT",
   "dependencies": {
-    "jsdoc": "^3.5.5",
+    "jsdoc": "^3.6.4",
     "oauth": "^0.9.12",
     "request": "^2.51.0"
   },
