@@ -265,6 +265,27 @@ function AgileBoardClient(jiraClient) {
     return this.jiraClient.makeRequest(options, callback);
   };
 
+      /**
+   * Get the features of an agile board - simple (next gen) only
+   *
+   * @method getFeaturesForBoard
+   * @memberOf AgileBoardClient#
+   * @param opts The request options to send to the Jira API
+   * @param opts.boardId The agile board id.
+   * @param callback Called when the epics have been retrieved.
+   * @return {Promise} Resolved when the epics have been retrieved.
+   */
+  this.getFeaturesForBoard = function (opts, callback) {
+    var options = {
+      uri: this.jiraClient.buildAgileURL('/board/' + opts.boardId + '/features'),
+      method: 'GET',
+      json: true,
+      followAllRedirects: true
+    };
+
+    return this.jiraClient.makeRequest(options, callback);
+  };
+
   /**
    * DEPRECATE THIS API CALL
    *   -- Instead use some combination of:
